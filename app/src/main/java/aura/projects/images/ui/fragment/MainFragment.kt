@@ -24,17 +24,17 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFragmentViewModel>() 
         binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-            }
 
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
+                if(!recyclerView.canScrollVertically(1)){
+                    viewModel.loadImages()
+                }
             }
         })
     }
 
     override fun observes() {
         observe(viewModel.images) {
-            adapter.submitList(it)
+            adapter.submitList(it.toMutableList())
         }
     }
 }

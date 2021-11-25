@@ -6,7 +6,7 @@ import aura.projects.domain.usecase.GetImagesUseCase
 import org.koin.dsl.module
 
 val domainModule = module{
-    factory<GetImagesInteractor> { GetImagesUseCase(get()) }
+    single<GetImagesInteractor> { GetImagesUseCase(get()) }
 //    single { FeedPagingSource(get()) }
 
 }

@@ -58,4 +58,8 @@ class ImagesPagedAdapter : BaseAdapter<ItemImageBinding, Image, ImagesPagedAdapt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {
         return ImagesViewHolder(ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
+
+    override fun submitList(list: MutableList<Image>?) {
+        super.submitList(list)
+    }
 }

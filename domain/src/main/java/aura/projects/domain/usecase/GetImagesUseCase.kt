@@ -10,14 +10,16 @@ import aura.projects.domain.util.mapper.PostCardMapper
 class GetImagesUseCase(
     private val feedRepository: FeedRepository
 ): GetImagesInteractor {
+    private var page = 0
+    private val list = mutableListOf<Image>()
+
     override suspend fun invoke(): ActionResult<List<Image>> {
-        return when(val data = feedRepository.getImages()){
-            is ActionResult.Success ->{
-                val list = mutableListOf<Image>()
+        return when(val data = feedRepository.getImages(++page)){
+            is ActionResult.Success -> {
                 data.data?.postCard?.forEach {
                     list.add(ImageMapper(PostCardMapper(it)))
                 }
-                ActionResult.Success(list)
+                ActionResult.Success(list.toList())
             }
             is ActionResult.Error -> {
                 ActionResult.Error(data.errors)
