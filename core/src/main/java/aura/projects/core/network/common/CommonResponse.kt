@@ -1,4 +1,4 @@
-package aura.projects.data.model.response.common
+package aura.projects.core.network.common
 
 import com.squareup.moshi.Json
 

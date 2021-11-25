@@ -49,5 +49,6 @@ dependencies {
     implementation libs.lifecycle_common
     implementation libs.retrofit
     implementation libs.moshi
+    implementation libs.koinAndroid
 
 }

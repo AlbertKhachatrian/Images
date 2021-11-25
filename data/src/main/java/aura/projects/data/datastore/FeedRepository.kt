@@ -1,5 +1,8 @@
 package aura.projects.data.datastore
 
-interface FeedRepository {
+import aura.projects.core.network.ActionResult
+import aura.projects.data.model.response.PostCardListResponse
 
+interface FeedRepository {
+    suspend fun getImages(page: Int): ActionResult<PostCardListResponse>
 }

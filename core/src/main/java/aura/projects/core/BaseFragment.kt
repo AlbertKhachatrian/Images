@@ -19,13 +19,13 @@ abstract class BaseFragment<ViewBind : ViewBinding, ViewModel: BaseViewModel> : 
 
     private lateinit var navController: NavController
 
-    protected abstract fun initBinding(): ViewBind
+    protected abstract fun initBinding(inflater: LayoutInflater): ViewBind
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = initBinding()
+        binding = initBinding(inflater)
         return binding.root
     }
 

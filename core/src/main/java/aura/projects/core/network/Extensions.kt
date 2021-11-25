@@ -1,6 +1,7 @@
 package aura.projects.core.network
 
 import android.util.Log
+import aura.projects.core.network.common.CommonResponse
 import retrofit2.Response
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -16,14 +17,30 @@ suspend fun <R> makeApiCall(
     ActionResult.Error(CallException(1000,"Check internet connection"))
 }catch (e: Exception) {
     Log.i("RESPONSES", "ERROR:${e.message.toString()}")
-    ActionResult.Error(CallException<Nothing>(errorMessage = e.message, errorCode = errorMessage))
+    ActionResult.Error(CallException(errorMessage = e.message, errorCode = errorMessage))
+}
+
+fun <R> analyzeCommonResponse(
+    response: Response<CommonResponse<R>>
+):ActionResult<R>{
+    return when{
+        response.isSuccessful && response.code() == 200 && response.body()?.status == 200 -> {
+            ActionResult.Success(response.body()?.data)
+        }
+        response.code() in 400..500 ->{
+            ActionResult.Error(CallException(response.code(), response.message()))
+        }
+        else -> {
+            ActionResult.Error(CallException(response.code(), response.message()))
+        }
+    }
 }
 
 fun <R> analyzeResponse(
     response: Response<R>
 ): ActionResult<R> {
     return when {
-        response.isSuccessful -> {
+        response.isSuccessful && response.code() == 200-> {
             ActionResult.Success(response.body())
         }
         response.code() in 400..500 -> {

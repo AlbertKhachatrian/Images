@@ -1,6 +1,5 @@
 package aura.projects.core.network
 
-data class CallException<ErrorBody>(
-    val errorCode: Int? = null,
-    val errorMessage: String? = null
-)
+class CallException(private val errorCode: Int? = null, private val errorMessage: String? = null) : Throwable(errorMessage.toString()){
+
+}

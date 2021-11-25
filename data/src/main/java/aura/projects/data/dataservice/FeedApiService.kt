@@ -1,7 +1,7 @@
 package aura.projects.data.dataservice
 
 import aura.projects.data.model.response.PostCardListResponse
-import aura.projects.data.model.response.common.CommonResponse
+import aura.projects.core.network.common.CommonResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
