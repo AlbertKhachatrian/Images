@@ -4,5 +4,5 @@ import aura.projects.core.network.ActionResult
 import aura.projects.data.model.response.PostCardListResponse
 
 interface FeedRepository {
-    suspend fun getImages(page: Int): ActionResult<PostCardListResponse>
+    suspend fun getImages(): ActionResult<PostCardListResponse>
 }

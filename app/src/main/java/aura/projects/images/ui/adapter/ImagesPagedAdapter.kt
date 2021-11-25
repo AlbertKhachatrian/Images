@@ -2,19 +2,24 @@ package aura.projects.images.ui.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import aura.projects.core.BaseAdapter
+import aura.projects.core.BaseViewHolder
 import aura.projects.domain.model.Image
 import aura.projects.images.R
 import aura.projects.images.databinding.ItemImageBinding
 import com.bumptech.glide.Glide
+import java.lang.NullPointerException
 import java.util.*
 
 
-class ImagesPagedAdapter : PagingDataAdapter<Image, ImagesPagedAdapter.ImagesViewHolder>(diffCallback) {
+class ImagesPagedAdapter : BaseAdapter<ItemImageBinding, Image, ImagesPagedAdapter.ImagesViewHolder>(diffCallback) {
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Image>() {
@@ -29,13 +34,20 @@ class ImagesPagedAdapter : PagingDataAdapter<Image, ImagesPagedAdapter.ImagesVie
         }
     }
 
-    inner class ImagesViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ImagesViewHolder(private val binding: ItemImageBinding) : BaseViewHolder<Image, ItemImageBinding>(binding) {
 
-        fun bind(item: Image){
-            val array: Array<String> = binding.root.context.resources.getStringArray(R.array.rainbow)
-            val randomStr = array[Random().nextInt(array.size)]
+        override fun bind(item: Image){
+            val rnd = Random()
+            val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
 
-            Glide.with(binding.root.context).load(item.url).placeholder(ColorDrawable(Color.parseColor(randomStr))).into(binding.root)
+
+            try {
+                Glide.with(binding.root.context)
+                    .load("http://static.wizl.itech-mobile.ru" + item.url)
+                    .placeholder(ColorDrawable(color)).into(binding.image)
+            }catch (e: NullPointerException){
+                e.printStackTrace()
+            }
         }
     }
 

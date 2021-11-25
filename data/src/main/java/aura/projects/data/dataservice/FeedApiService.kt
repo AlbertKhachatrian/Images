@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface FeedApiService {
 
-    @GET("api/v2/lifestyle/feed")
+    @GET("lifestyle/feed")
     suspend fun getImages(@Query("page") page: Int): Response<CommonResponse<PostCardListResponse>>
 
 }

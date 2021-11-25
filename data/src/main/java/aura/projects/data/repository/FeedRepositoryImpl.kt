@@ -12,7 +12,10 @@ import java.lang.Exception
 class FeedRepositoryImpl(
     private val feedApiService: FeedApiService
 ) : FeedRepository {
-    override suspend fun getImages(page: Int): ActionResult<PostCardListResponse> {
+    private var page = 0
+
+    override suspend fun getImages(): ActionResult<PostCardListResponse> {
+        page++
         return makeApiCall({
             analyzeCommonResponse(feedApiService.getImages(page))
         })

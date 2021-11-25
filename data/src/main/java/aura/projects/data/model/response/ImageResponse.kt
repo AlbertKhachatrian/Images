@@ -6,7 +6,7 @@ data class ImageResponse (
     @field:Json(name = "url")
     val url: String,
     @field:Json(name = "dimensions")
-    val dimensions: DimensionsResponse,
+    val dimensions: DimensionsResponse?,
     @field:Json(name = "video")
     val video: Any?,
     @field:Json(name = "preview")
