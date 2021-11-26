@@ -10,6 +10,7 @@ import aura.projects.core.BaseViewHolder
 import aura.projects.domain.model.Image
 import aura.projects.images.databinding.ItemImageBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import java.lang.NullPointerException
 import java.util.*
 
@@ -39,6 +40,7 @@ class FeedAdapter : BaseAdapter<ItemImageBinding, Image, FeedAdapter.ImagesViewH
             try {
                 Glide.with(binding.root.context)
                     .load(item.url)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(ColorDrawable(color)).into(binding.image)
             }catch (e: NullPointerException){
                 e.printStackTrace()
