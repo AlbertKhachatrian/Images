@@ -5,5 +5,5 @@ import aura.projects.core.network.ActionResult
 import aura.projects.domain.model.Image
 
 interface GetImagesInteractor {
-    suspend operator fun invoke(): ActionResult<List<Image>>
+    suspend operator fun invoke(): ActionResult<List<Image>>?
 }

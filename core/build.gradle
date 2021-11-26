@@ -19,6 +19,16 @@ android {
     }
 
     buildTypes {
+        def STRING = "String"
+        def BASE_URL = '"http://wizl.itech-mobile.ru/api/v2/"'
+        def BASE_URL_IMAGE = '"http://static.wizl.itech-mobile.ru"'
+        def BASE_URL_NAME = 'BASE_URL'
+        def BASE_URL_IMAGE_NAME = 'BASE_URL_IMAGE'
+        debug {
+            minifyEnabled false
+            buildConfigField(STRING, BASE_URL_NAME, BASE_URL)
+            buildConfigField(STRING, BASE_URL_IMAGE_NAME, BASE_URL_IMAGE)
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

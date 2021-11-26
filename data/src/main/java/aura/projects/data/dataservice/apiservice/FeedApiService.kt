@@ -1,4 +1,4 @@
-package aura.projects.data.dataservice
+package aura.projects.data.dataservice.apiservice
 
 import aura.projects.data.model.response.PostCardListResponse
 import aura.projects.core.network.common.CommonResponse
